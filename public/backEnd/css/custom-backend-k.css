@@ -1,0 +1,189 @@
+/* Css for Kareem */
+.ti-view-grid:before,
+.ti-pencil:before,
+.ti-trash:before {
+  font-size: 15px;
+  color: var(--base_color);
+}
+.CRM_dropdown.dropdown .dropdown-toggle {
+  border: 1px solid #fff !important;
+}
+
+#accordion .card-body p {
+  /* color: #e27126; */
+  font-weight: bold;
+  font-size: 22px;
+}
+
+#accordion .card-body {
+  /* color: #e27126; */
+  font-weight: 700;
+  font-size: 17px;
+}
+
+/* #accordion .card-header {
+  background-color: #2e2e2e;
+} */
+
+.sms-accordion .card-header .card-link {
+  /* color: #e27126 !important; */
+}
+.primary_btn:hover,
+.primary_btn_1,
+.primary_btn_1:hover,
+.primary_btn_2,
+.primary_btn_2:hover,
+.primary_btn_large,
+.primary_btn_large:hover,
+.primary_btn_circle:hover,
+.CRM_dropdown.dropdown .dropdown-toggle:hover,
+.CRM_dropdown.dropdown .dropdown-toggle:focus,
+.primary_color_btn,
+.primary_color_btn2,
+.pos_tab_btn ul li a:hover,
+.pos_tab_btn ul li a.active,
+.header_iner
+  .header_right
+  .header_notification_warp
+  li
+  > a
+  > span.notification_count,
+.crm_tab_header ul li a.active,
+.switch_toggle input:checked + .slider:before {
+  /* background: #e27126 !important; */
+}
+
+.modal-content .modal-header {
+  /* background-color: #e27126 !important; */
+}
+.QA_section .QA_table tbody th,
+.QA_section .QA_table tbody td,
+.primary_input_label {
+  /* color: #ccc !important; */
+}
+.dataTables_paginate a.current {
+  /* background: #e27126 !important; */
+}
+
+.Menu_NOtification_Wrap .notification_Header {
+  /* background: #e27126 !important; */
+}
+
+.CRM_dropdown.dropdown .dropdown-toggle:after {
+  content: "\e63d" !important;
+}
+
+.dropdown-toggle:after {
+  margin-left: 1.255em !important;
+}
+.QA_section .QA_table tbody td a {
+  background: transparent !important;
+  /* float: left; */
+  padding: 0;
+  margin: 1px;
+}
+/* .white-box.single-summery:before,
+.white-box.single-summery:after {
+  background-color: #e27126 !important;
+} */
+.item_header .dd-handle {
+  /* color: #e27126 !important; */
+}
+.fa-file-text-o:before {
+  content: "\f15c" !important;
+}
+.fa-columns:before {
+  content: "\f07b" !important;
+}
+
+button.dt-button:hover:not(.disabled),
+div.dt-button:hover:not(.disabled),
+a.dt-button:hover:not(.disabled) {
+  border: 0;
+  /* background-color: #e27126 !important; */
+  color: #ffffff;
+  /* background: #e27126 !important; */
+}
+code {
+  /* color: #e27126 !important; */
+}
+.menu_seperator {
+  color: #fff;
+}
+.white-box.single-summery:hover {
+  /* background: #e27126 !important; */
+  box-shadow: none !important;
+}
+.white-box.single-summery:hover:before,
+.white-box.single-summery:hover:after {
+  background: none !important;
+}
+
+.fa-map-o:before {
+  content: "\f2d0" !important;
+}
+.fa-wechat:before,
+.fa-weixin:before {
+  content: "\f086" !important;
+}
+#table_id_length > label > select {
+  word-wrap: normal;
+  border: none;
+  width: 65px;
+  font-weight: bold;
+  margin: 0 10px;
+  padding: 0px;
+  height: 30px;
+  border: 2px solid var(--base_color);
+  border-radius: 6px;
+}
+/* Start The April Tasks  */
+.fa-print:before {
+  content: "\f02f" !important;
+}
+.fa-hotel:before {
+  content: "\f0f9" !important;
+}
+.fa-users:before {
+  content: "\f549" !important;
+}
+.fa-server:before {
+  content: "\f3d1" !important;
+}
+.fa-star:before {
+  content: "\f51c" !important;
+}
+/* End The April Tasks  */
+
+/* Start Form  */
+.login_wrapper {
+  border: 2px solid #fff;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.login_wrapper_logo {
+  background-color: #2d3436;
+  padding: 10px;
+  border-radius: 10px;
+}
+.login_wrapper_logo img {
+  width: 90%;
+}
+.login_wrapper_content .input-control-input[type="submit"] {
+  border-radius: 10px;
+}
+.login_wrapper_content p a {
+  text-decoration: underline;
+}
+.login_wrapper_content h4 {
+  font-size: 24px;
+  line-height: 1.5;
+  margin-top: 25px;
+  margin-bottom: 0px;
+  text-align: center;
+  color: #ff934b;
+  font-weight: bold;
+}
+/* End Form  */

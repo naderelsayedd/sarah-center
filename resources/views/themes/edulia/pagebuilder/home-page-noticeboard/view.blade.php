@@ -1,0 +1,1 @@
+ <x-home-page-noticeboard :sorting="pagesetting('notice_gallery_sorting')" :count="pagesetting('notice_gallery_count')"></x-home-page-noticeboard>

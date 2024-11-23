@@ -1,0 +1,1 @@
+ <x-teacher-list :column="pagesetting('teacher_area_column')" :count="pagesetting('teacher_count')"> </x-teacher-list>

@@ -1,0 +1,20 @@
+.white-box{box-shadow:0px 10px 15px rgb(0 0 0 / 13%) !important;}
+
+.header_iner .header_middle{display:flex !important;justify-content:center;}
+.header_middle .select_style{gap:10px;justify-content:center;margin:0 !important;}
+.header_middle a{margin:0 !important;}
+.header_middle a:nth-child(2){display:none;}
+
+@media (max-width: 470px) {
+.header_iner .header_middle{display:none !important;justify-content:center;}
+}
+
+
+@media (max-width: 1640px) {
+
+    .QA_section .QA_table .table{width:100% !important;display:block;overflow-x: scroll;}
+    table.dataTable > tbody > tr.child{display:none !important;}
+    .QA_section .QA_table .table thead th, .QA_section .QA_table tbody th, .QA_section .QA_table tbody td{display:table-cell !important;}
+    table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child:before{content:unset !important;}
+
+}

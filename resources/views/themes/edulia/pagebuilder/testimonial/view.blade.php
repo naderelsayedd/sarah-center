@@ -1,0 +1,1 @@
+<x-testimonial :count="pagesetting('testionmonial_count')" :sorting="pagesetting('testionmonial_sorting')"> </x-testimonial>

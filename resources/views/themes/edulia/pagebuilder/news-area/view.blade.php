@@ -1,0 +1,1 @@
+<x-news :colum="pagesetting('news_area_column')" :count="pagesetting('news_count')" :readmore="pagesetting('read_more_btn')" :sorting="pagesetting('news_sorting')"></x-news>

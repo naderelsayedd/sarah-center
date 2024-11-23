@@ -1,0 +1,587 @@
+<?php
+	$ttl_rtl = $setting->ttl_rtl;
+?>
+
+<!doctype html>
+<html lang="en">
+	
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="icon" href="{{asset(generalSetting()->favicon)}}" type="image/png"/>
+		<meta name="_token" content="{!! csrf_token() !!}"/>
+		<link rel="stylesheet" href="{{asset('public/backEnd/login2')}}/css/bootstrap.min.css">
+		<link rel="stylesheet" href="{{asset('public/backEnd/login2')}}/themify-icons.css">
+		
+		
+		<link rel="stylesheet" href="{{url('/')}}/public/backEnd/vendors/css/nice-select.css" />
+		<link rel="stylesheet" href="{{url('/')}}/public/backEnd/vendors/js/select2/select2.css" />
+		
+		
+		
+		<link rel="stylesheet" href="{{asset('public/backEnd/login2')}}/css/style.css">
+		<link rel="stylesheet" href="{{asset('public/backEnd/')}}/vendors/css/toastr.min.css"/>
+		<title>{{isset($setting)? !empty($setting->site_title) ? $setting->site_title : 'System ': 'System '}} | @lang('auth.login')</title>
+		<style>
+			
+			.loginButton {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			}
+			
+			.loginButton{
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			}
+			.singleLoginButton{
+			flex: 22% 0 0;
+			}
+			
+			.loginButton .get-login-access {
+			display: block;
+			width: 100%;
+			border: 1px solid #fff;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			padding: 5px;
+			white-space: nowrap;
+			}
+			@media (max-width: 576px) {
+			.singleLoginButton{
+			flex: 49% 0 0;
+			}
+			}
+			@media (max-width: 576px) {
+			.singleLoginButton{
+			flex: 49% 0 0;
+			}
+			.loginButton .get-login-access {
+			margin-bottom: 10px;
+			}
+			}
+			.create_account a {
+			color: #828bb2;
+			font-weight: 500;
+			text-decoration: none;
+			}
+			
+			#select-school{
+			border: 0px;
+			border-radius: 0px;
+			border-bottom: 1px solid #d3cddd;
+			}
+			
+			.nice-select:after {
+			content: "\e62a";
+			font-family: "themify";
+			border: 0;
+			transform: rotate(0deg);
+			margin-top: -16px;
+			font-size: 12px;
+			font-weight: 500;
+			right: 18px;
+			transform-origin: none;
+			-webkit-transition: all 0.1s ease-in-out;
+			-moz-transition: all 0.1s ease-in-out;
+			-o-transition: all 0.1s ease-in-out;
+			transition: all 0.1s ease-in-out;
+			}
+			
+			.nice-select.open:after {
+			-webkit-transform: rotate(180deg);
+			-moz-transform: rotate(180deg);
+			-ms-transform: rotate(180deg);
+			-o-transform: rotate(180deg);
+			transform: rotate(180deg);
+			margin-top: 15px;
+			}
+			.niceSelect {
+			border: 0px;
+			border-bottom: 1px solid rgba(130, 139, 178, 0.3);
+			border-radius: 0px;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			color: #828bb2;
+			font-size: 12px;
+			font-weight: 500;
+			text-transform: uppercase;
+			padding: 0;
+			background: transparent;
+			}
+			.niceSelect:focus,.niceSelect:hover{
+			border-color: rgba(130, 139, 178, 0.3);
+			outline: none;
+			box-shadow: none !important;
+			}
+			.mb-26{
+			margin-bottom: 26px;
+			}
+			
+			.nice-select.open .list {
+			left: 0;
+			position: absolute;
+			right: 0;
+			}
+			.nice-select .nice-select-search {
+			box-sizing: border-box;
+			background-color: #fff;
+			border: 1px solid rgba(130, 139, 178, 0.3);
+			border-radius: 3px;
+			box-shadow: none;
+			color: #333;
+			display: inline-block;
+			vertical-align: middle;
+			padding: 0px 8px;
+			width: 100% !important;
+			height: 36px;
+			line-height: 36px;
+			outline: 0 !important;
+			}
+			.nice-select .list {
+			margin-top: 5px;
+			top: 100%;
+			border-top: 0;
+			border-radius: 0 0 5px 5px;
+			max-height: 210px;
+			overflow-y: scroll;
+			padding: 52px 0 0;
+			left: 0 !important;
+			right: 0 !important;
+			}
+			.niceSelect span.current {
+			width: 85% !important;
+			overflow: hidden !important;
+			display: block !important;
+			}
+			/* Start Styles */
+			.in_login_content img{
+			max-width: fit-content !important;
+			margin-bottom: 0  !important; 
+			}
+			/* End Styles */
+		</style>
+	</head>
+	<body >
+		<div class="in_login_part mb-40"  style="{{$css}}">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-sm-8 col-lg-5 col-xl-10 col-md-7">
+						@if($errors->any())
+						{{ implode('', $errors->all('<div>:message</div>')) }}
+						@endif
+						<div class="in_login_content">
+							
+							<div class="in_login_page_iner">
+								<div class="in_login_page_header" style="display: flex;justify-content: space-between;align-items: center;">
+									@if(!empty($setting->logo))<img src="{{asset($setting->logo)}}" style="width: 20%;margin:-7px 0 0 0 " alt="Login Panel">@endif
+									<h5 style="font-size: 18px;"> {{__('Registration')}} @lang('common.details')</h5>
+								</div>
+								
+								<div class="course_item_img" >
+									<div class="course_item_img_inner" style="float:left; ">
+										<img style="width: 100%;" src="{{ asset($course->image) }}" alt="{{ $course->courseCategory->category_name }}">
+									</div>
+									
+									@if($course->courseClass->class_name)
+									<span style="font-weight: bold;font-size: 20px;color: #ff934b;"
+									class="course_item_img_status_right">{{ $course->courseClass->class_name }}
+									</span>
+									@endif 
+								</div>
+								<div class="course_item_inner" style="margin-top: 10px;">
+									<h4>{{ $course->title }}</h4>
+								</div>
+								<form method="POST" class="loginForm" action="{{route('customer_register',['class_id' => $class_id, 'course_id' => $course_id])}}" id="infix_form">
+									@csrf
+									
+									<input type="hidden" name="school_id" value="1">
+									<input type="hidden" name="username" id="username-hidden">
+									<input type="hidden" name="admission_number" value="{{$studentLastId}}">
+									<input type="hidden" name="class_id" value="{{$class_id}}">
+									<input type="hidden" name="course_id" value="{{$course_id}}">
+									<input type="hidden" name="section_id" value="{{$classSection->section_id}}">
+									
+									<?php if(session()->has('message-danger') != ""): ?>
+                                    <?php if(session()->has('message-danger')): ?>
+                                    <p class="text-danger"><?php echo e(session()->get('message-danger')); ?></p>
+                                    <?php endif; ?>
+									<?php endif; ?>
+									<input type="hidden" id="url" value="{{url('/')}}">		
+									
+									<div class="row">
+										<div class="col-6">
+											<div class="in_single_input">
+												<input type="text" placeholder="@lang('auth.fathers_name')" name="fathers_name" class="{{ $errors->has('fathers_name') ? ' is-invalid' : '' }}" value="{{old('fathers_name')}}" id="fathers_name">
+												<span class="addon_icon">
+													<i class="ti-user"></i>
+												</span>
+												@if ($errors->has('fathers_name'))
+												<span class="text-danger text-left pl-3 d-block" role="alert">
+													{{ $errors->first('fathers_name') }}
+												</span>
+												@endif
+											</div>
+										</div>
+										<div class="col-6">
+											<div class="in_single_input">
+												<input type="text" placeholder="@lang('auth.fathers_phone')" name="fathers_phone" class="{{ $errors->has('fathers_phone') ? ' is-invalid' : '' }}" value="{{old('fathers_phone')}}" id="fathers_phone">
+												<span class="addon_icon">
+													<i class="ti-phone"></i>
+												</span>
+												@if ($errors->has('fathers_phone'))
+												<span class="text-danger text-left pl-3 d-block" role="alert">
+													{{ $errors->first('fathers_phone') }}
+												</span>
+												@endif
+											</div>
+										</div>
+									</div>
+									
+									<div class="in_single_input">
+										<input type="text" placeholder="@lang('auth.enter_father_email')" name="guardians_email" class="{{ $errors->has('guardians_email') ? ' is-invalid' : '' }}" value="{{old('guardians_email')}}" id="guardians_email-address">
+										<span class="addon_icon">
+											<i class="ti-email"></i>
+										</span>
+										@if ($errors->has('guardians_email'))
+                                        <span class="text-danger text-left pl-3 d-block" role="alert">
+                                            {{ $errors->first('guardians_email') }}
+										</span>
+										@endif
+									</div>
+									
+									<div class="row">
+										<div class="col-6">
+											<div class="in_single_input">
+												<input type="password" placeholder="@lang('auth.enter_fathers_password')" name="fathers_password" class="{{ $errors->has('fathers_password') ? ' is-invalid' : '' }}" value="{{old('fathers_password')}}">
+												<span class="addon_icon">
+													<i class="ti-key"></i>
+												</span>
+												@if ($errors->has('fathers_password'))
+												<span class="text-danger text-left pl-3 d-block" role="alert">
+													{{ $errors->first('fathers_password') }}
+												</span>
+												@endif
+											</div>
+										</div>
+										<div class="col-6">
+											<div class="in_single_input">
+												<input type="password" placeholder="@lang('auth.enter_confirm_fathers_password_confirmation')" name="fathers_password_confirmation"
+												class="{{ $errors->has('fathers_password_confirmation') ? ' is-invalid' : '' }}" value="{{old('fathers_password_confirmation')}}">
+												<span class="addon_icon">
+													<i class="ti-key"></i>
+												</span>
+												@if ($errors->has('fathers_password_confirmation'))
+												<span class="text-danger text-left pl-3 d-block" role="alert">
+													{{ $errors->first('fathers_password_confirmation') }}
+												</span>
+												@endif
+											</div>
+										</div>
+									</div>
+									
+									
+									<h1>Child Account Info</h1>
+									
+									
+									
+									<div class="row">
+										<div class="col-6">
+											<div class="in_single_input">
+												<input required type="text" placeholder="@lang('auth.enter_name')" name="first_name" class="{{ $errors->has('first_name') ? ' is-invalid' : '' }}" value="{{old('first_name')}}" id="first_name">
+												<span class="addon_icon">
+													<i class="ti-user"></i>
+												</span>
+												@if ($errors->has('first_name'))
+												<span class="text-danger text-left pl-3 d-block" role="alert">
+													{{ $errors->first('first_name') }}
+												</span>
+												@endif
+											</div>
+										</div>
+										<div class="col-6">
+											<div class="in_single_input">
+												<input required type="text" placeholder="@lang('auth.enter_last_name')" name="last_name" class="{{ $errors->has('last_name') ? ' is-invalid' : '' }}" value="{{old('last_name')}}" id="last_name">
+												<span class="addon_icon">
+													<i class="ti-user"></i>
+												</span>
+												@if ($errors->has('last_name'))
+												<span class="text-danger text-left pl-3 d-block" role="alert">
+													{{ $errors->first('last_name') }}
+												</span>
+												@endif
+											</div>
+										</div>
+									</div>
+									<div class="in_single_input">
+										<input type="text" placeholder="@lang('auth.enter_email') Optional" name="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{old('email')}}" id="email-address">
+										<span class="addon_icon">
+											<i class="ti-email"></i>
+										</span>
+										@if ($errors->has('email'))
+                                        <span class="text-danger text-left pl-3 d-block" role="alert">
+                                            {{ $errors->first('email') }}
+										</span>
+										@endif
+									</div>
+									
+									<div class="row">
+										<div class="col-6">
+											<div class="primary_input mb-40 in_single_input">
+												<select class="mb-26 niceSelect infix_theme_style w-100 bb form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" id="select-section" required>
+													<option data-display="Select Gender *" value="">Select Gender *</option>
+													<option value="1">Male</option>
+													<option value="2">Female</option>
+													<option value="3">Others</option>
+												</select>
+											</div>
+											@if ($errors->has('gender'))
+											<span class="invalid-select text-left text-danger pl-3" role="alert">
+												{{ $errors->first('gender') }}
+											</span>
+											@endif
+										</div>
+										<div class="col-6">
+											<div class="in_single_input">
+												<input type="text" placeholder="@lang('auth.phone_number')" name="phone_number" class="{{ $errors->has('phone_number') ? ' is-invalid' : '' }}" value="{{old('phone_number')}}" id="phone_number">
+												<span class="addon_icon">
+													<i class="ti-phone"></i>
+												</span>
+												@if ($errors->has('phone_number'))
+												<span class="text-danger text-left pl-3 d-block" role="alert">
+													{{ $errors->first('phone_number') }}
+												</span>
+												@endif
+											</div>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="col-6">
+											<input required type="checkbox" id="term_and_conditions" name="term_and_conditions" value="1" style="display:block; float:left">
+											<label for="term_and_conditions" style="margin-left:10px; float;right"><a  for="term_and_conditions" href="javascript:void(0)" id="myBtn">@lang('auth.term_and_conditions')</a></label>
+										</div>
+										<div class="col-6">
+											<input required type="checkbox" id="is_confirmation" name="is_confirmation" value="1" style="display:block; float:left">
+											<label for="is_confirmation" style="margin-left:10px; float;right"><a href="javascript:;">@lang('auth.is_confirmation')</a></label>
+										</div>
+									</div>
+									<div class="in_login_button text-center">
+										<button type="submit" class="in_btn" id="btnsubmit" style="background: blue;">
+											<span class="ti-lock"></span>
+											{{__('Registred')}}
+										</button>
+									</div>
+									<div class="create_account text-center">
+										<p>Already have an account? <a href="{{url('login')}}">Login Here</a></p>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+			
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					
+					<h3 style="color:white;margin: 0 auto;color: #FF934B;font-weight: 700;">@lang('auth.term_and_conditions')</h3>
+					<span class="close">&times;</span>
+				</div>
+				<div class="modal-body">
+					<div class="container" style="font-size:16px;line-height:30px;direction:rtl;">
+						<div class="row">
+							<div class="col-12">
+								<h3 class="text-center mb-30">عقد اتفاق تسجيل طفل</h3>
+								<strong>نأمل من حضرتكم قراءة البنود بتمعن والموافقة عليها فهذه بنود ثابته خاصة بمصلحة الأطفال بشكل خاص والمركز بشكل عام:</strong>
+								<ul style="list-style:none;">
+									<li>1.  أعي أنه بمجرد تسجيل طفلي/طفلتي بأنني موافق على الالتزام بجميع قوانين ولوائج المركز، أعي بأن جميع القرارات الصادرة من الإدارة هي قرارات نهائية.</li>
+									<li>2. أعي بأنه يجب دفع الرسوم مسبقا. وأنا أوافق على دفع جميع الرسوم في موعدها أو قبل انتهاء الاشتراك حسب التاريخ المسجل في الإيصال، وفي حال التقسيط يجب التزامي بدفع القسط بتاريخه وسيتم إيقاف اشتراك طفلي في حال تعذر دفعه. </li>
+									<li>3. أعي أنه يجب دفع المبلغ مقدما لحجز مكان الطفل. أي تاخير في الدفع سيتم إلغاء مكان الطفل، مبلغ حجز المقعد المبكر 300 ريال تدخل من ضمن سعر الاشتراك، وغير قابلة للاسترداد في حال الانسحاب من الاشتراك. </li>
+									<li><strong><u>4. أعى بأن رسوم التسجيل التى يتم دفعها غير مسترجعة لأى سبب.</u></strong></li>
+									<li>5. أعي أنه يتوجب عليّ إعلام المركز فورًا في حال تغيير أرقام الهواتف أو تغيير رقم الطوارئ. </li>
+									<li>6. أعي بأنه يتوجب على إعلام معلمة طفلي، وإدارة المركز بأي مشكلة لدى طفلي تمنعه من المشاركة في نشاط معين. </li>
+									<li>7. أنا على دراية تامة بأوقات ومواعيد المركز الصباحية من الساعة 6 ص حتى 6 م وأعي أنه يجب اتباعها بدقة وأن اتحمل رسوم التأخير</li>
+									<li>8. أعي أنه في حال تأخير الطفل عن عدد الساعات المختارة يحسب مبلغ تأخير قدره 30 ريال لكل نصف ساعة و60 بعد مرور ساعة.</li>
+									<li>9. لا يوجد أي خصومات أو تعويض أو استرجاع مبلغ لأي سبب (اجازة مرضية، سفرا انتقال، جائحة...).</li>
+									<li>10. أعي أنه يجب على الإفصاح عن أي مشاكل صحية أو سلوك عدواني أو أساليب خاطنة لدى طفلي حتى أتجنب إلغاء اشتراك طفلي وعدم استرجاع أي مبلغ، وأن افصاحي لها بهدف تعاون المركز معي بحلها وإفادتي بخطة تعديل سلوك. </li>
+									<li>11. أعي أنه عليّ إنزال طفلي بنفسي من السيارة وتسليمه للعاملة عند باب المركز. </li>
+									<li>12. يتعذر على إدارة المركز التواصل مع الآباء فيما يخص مشاكل الأطفال والاشتراك إلا في حال الطلاق.</li>
+									<li>
+										<strong><u>13. أعي أنه لدى المركز الحق بأن يلغى اشتراك أي طفل أو عدم تجديد اشتراك للأسباب التالية:</u></strong> 
+										<ul style="list-style:none;">
+											<li>1- إذا كان للطفل احتياجات خاصة (نعتذر وذلك لعدم وجود صلاحيات من التنمية الاجتماعية باستقبالهم).</li>
+											<li>2- سلوكيات خاطئة غير قابله للتعديل.</li>
+											<li>3- في حال عدم إفصاح ولي الأمر عن أي مشكلة عقلية، أو نفسية، أو جسدية، أو صحية. </li>
+											<li>4- عدم تكيف الرضع بعد مرور أسبوعين من الاشتراك.</li>
+											<li>5- عندما تؤثر احتياجات الرضيع الزائدة سلبا على مصلحة بقية الرضع (حمله طوال الوقت بكاء متواصل، أساليب رعاية خاطئة من قبل أولياء الأمور، إحضار الأجهزة الالكترونية).</li>
+											<li>6- إذا كان لدى الطفل سلوك غير مقبول ولم يتم الإفصاح عنه مثل (عدوانية، عض، بصق، ضرب، ألفاظ غير لائقة وغيرها)؛ أسباب أخرى لمصلحة بقية الأطفال. </li>
+											<li>7- عند إساءة ولي الأمر إلى أحد موظفات المركز، أو العاملات أو الحارس.</li>
+										</ul>
+									</li>
+									<li>14. المركز غير مسؤول عن عدم قراءة ولي الأمر لعقد الاتفاق وسوف يتم تطبيق العقد كما هو.</li>
+									<li>15. عدم تقيد ولي الأمر بالعقد المتفق عليه.</li>
+								</ul>
+							</div>
+						</div>
+					</div>			
+				</div>
+			</div>
+			
+		</div>
+		
+		<!--================ Footer Area =================-->
+		<footer class="footer_area min-height-10" style="margin-top: -50px;">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-12 text-center">
+						<p style="color: #828bb2">{!! generalSetting()->copyright_text !!} </p>
+					</div>
+				</div>
+			</div>
+		</footer>
+		
+		
+		<!--================ End Footer Area =================-->
+		<script src="{{asset('public/backEnd/login2')}}/js/jquery-3.4.1.min.js"></script>
+		<script src="{{asset('public/backEnd/login2')}}/js/popper.min.js"></script>
+		<script src="{{asset('public/backEnd/login2')}}/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="{{asset('public/backEnd/')}}/vendors/js/toastr.min.js"></script>
+		<script src="{{asset('public/backEnd/')}}/vendors/js/nice-select.min.js"></script>
+		
+		<style>
+			/* The Modal (background) */
+			.modal {
+			display: none; /* Hidden by default */
+			position: fixed; /* Stay in place */
+			z-index: 1; /* Sit on top */
+			padding-top: 10px; /* Location of the box */
+			left: 0;
+			top: 0;
+			width: 100%; /* Full width */
+			height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: rgb(0,0,0); /* Fallback color */
+			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			}
+			
+			/* Modal Content */
+			.modal-content {
+			position: relative;
+			background-color: #fefefe;
+			margin: auto;
+			padding: 0;
+			border: 1px solid #888;
+			width: 80%;
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+			-webkit-animation-name: animatetop;
+			-webkit-animation-duration: 0.4s;
+			animation-name: animatetop;
+			animation-duration: 0.4s
+			}
+			
+			/* Add Animation */
+			@-webkit-keyframes animatetop {
+			from {top:-300px; opacity:0} 
+			to {top:0; opacity:1}
+			}
+			
+			@keyframes animatetop {
+			from {top:-300px; opacity:0}
+			to {top:0; opacity:1}
+			}
+			
+			/* The Close Button */
+			.close {
+			color: white;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+			}
+			
+			.close:hover,
+			.close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+			}
+			
+			.modal-header {
+			padding: 2px 16px;
+			background-color: #2D3436;
+			color: white;
+			}
+			
+			.modal-body {padding: 2px 16px;}
+			
+			.modal-footer {
+			padding: 2px 16px;
+			background-color: #1B4899;
+			color: white;
+			}
+			.boxed_btn {
+			background-color: #2D3436 !important;}
+		</style>
+		
+		<script>
+			if ($('.niceSelect').length) {
+				$('.niceSelect').niceSelect();
+			}
+			$(document).ready(function () {
+				
+				$('#btnsubmit').on('click',function()
+				{
+					$(this).html('Please wait ...')
+					.attr('disabled','disabled');
+					$('#infix_form').submit();
+				});
+				
+			});
+			
+			
+			$(document).ready(function() {
+				$("#email-address").keyup(function(){
+					$("#username-hidden").val($(this).val());
+				});
+			});
+			
+		</script>
+		
+		<script>
+			// Get the modal
+			var modal = document.getElementById("myModal");
+			
+			// Get the button that opens the modal
+			var btn = document.getElementById("myBtn");
+			
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+			
+			// When the user clicks the button, open the modal 
+			btn.onclick = function() {
+				modal.style.display = "block";
+			}
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+			
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}
+		</script>
+		
+		{!! Toastr::message() !!}
+	</body>
+</html>
